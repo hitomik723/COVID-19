@@ -1,7 +1,7 @@
 ---
-title: "HW3 Kariya CSSS569"
+title: "COVID-19 in the United States"
 author: "Hitomi Kariya, MPH in Health Services"
-date: "3/17/2020"
+date: "7/8/2020"
 output: html_notebook
 runtime: shiny
 ---
