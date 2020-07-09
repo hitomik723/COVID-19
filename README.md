@@ -1,2 +1,2 @@
 # COVID-19
-This is a repo for COVID19 data visualization.
+This is a repo for COVID-19 data visualization.
