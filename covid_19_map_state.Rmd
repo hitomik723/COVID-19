@@ -20,11 +20,7 @@ library(tidyverse)         # Load CSV data sets
 
 * I have created a dashboard of two maps for the number of cases and deaths caused by coronavirus in the United States. You can hover over the maps to see the number of cases and deaths reported by states.
 
-* Underlying data: The data is retreived from https://www.nytimes.com/interactive/2020/us/coronavirus-us-cases.html .
-
-* The purpose of this interactive display is to visualize the number of cases and deaths reported by states. The original article in the New York Times visualized a map with locations within states, but here I used the counts by states to simply show the differences across states. I used the "shinydashboard" and  "plotly" packages as well as "shiny" and "tidyverse" packages.
-
-* Goals achived: I was able to create two maps to display each of the number of cases and deaths, but my original goal was to display these two counts on one map by color-scaling the number of cases abd proportionating the number of deaths by states. The next goal for me is to learn how to display these two counts as one map.
+* Underlying data: The data is retreived from https://www.worldometers.info/coronavirus/country/us/ .
 
 ```{r}
 ## Data assigning & object preps ##
@@ -69,8 +65,6 @@ p2 <- plot_geo(df, locationmode = 'USA-states') %>%
     geo = g
   )
 
-### For the upcomoing version, I want to figure out a way to click on each state, then details on funding type can be displayed on the right bottom corner as a box.
-
 # Assign the dataset to global environment
 assign("df", df, envir=globalenv())
 ```
@@ -98,7 +92,7 @@ body <- dashboardBody(
         box(
           title = "How many COVID-19 cases are reported in the United States?",
           width = 4,
-          status = "primary", 'This is a map for the number of cases reported to be caused by coronavirus in the United States. The data is retreived from The New York Times, "U.S. Coronavorus Map: Cases Surpass 5,000". West Viginia remains the only state with no reported coronavirus cases as of 1:21 p.m. PDT, March 17, 2020.'
+          status = "primary", 'This is a map for the number of cases reported to be caused by coronavirus in the United States. The data was retreived on July 8, 2020. New York state has reported the most number of confirmed cases.'
           ),
         box(
           title = "COVID-19 in the United States", p, width = 8
@@ -111,7 +105,7 @@ body <- dashboardBody(
         box(
           title = "How many COVID-19 deaths are reported in the United States?",
           width = 4,
-          status = "primary", 'This is a map for the number deaths reported to be caused by coronavirus in the United States. The data is retreived from The New York Times, "U.S. Coronavorus Map: Cases Surpass 5,000". Washington state has reported the most number of deaths as of 1:21 p.m. PDT, March 17, 2020.'
+          status = "primary", 'This is a map for the number deaths reported to be caused by coronavirus in the United States. The data was retreived on July 8, 2020.'
           ),
         box(
           title = "COVID-19 in the United States", p2, width = 8
@@ -134,6 +128,7 @@ shinyApp(ui, server)
 * Next step 1: Figure out how to display these two maps as one map
 * Next step 2: Figure out how to render it as a html file 
 * Next step 3: Figure out a way to click on each state and display the numbers on the right bottom corner as a box.
+* Next step 4: Figure out a way to click on each state, then details on funding type can be displayed on the right bottom corner as a box.
 
 *References
 https://plotly-r.com/maps.html
