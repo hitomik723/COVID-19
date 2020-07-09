@@ -35,12 +35,13 @@ gray <- brewer[8]
 ```{r include=FALSE}
 #load a daataset
 owid_covid_data <- read_csv("owid-covid-data.csv")
-str(owid_covid_data)
+#str(owid_covid_data)
 
 #subset the dataset
 covid_us <- owid_covid_data %>% filter (location == "United States") %>% filter (date >= as.Date("2019-01-21"))
 ```
 
+### Figure 1. Epidemiologic Curves
 ```{r echo=FALSE, warning = FALSE}
 #Epidemiologic Curves
 ggplot(data = covid_us, aes(x = date, y = new_cases)) +
@@ -50,7 +51,7 @@ ggplot(data = covid_us, aes(x = date, y = new_cases)) +
        caption = "Data retrieved from Our World in Data",
        x = " \nDate of Illness Onset", y = "") +
   theme_light() +
-  theme(plot.title = element_text(color="black", size=22, face="bold", family="Encode Sans Normal"),
+  theme(plot.title = element_text(color="black", size=18, face="bold", family="Encode Sans Normal"),
         plot.subtitle = element_text(color="#969494", size=16, family="Encode Sans Narrow"),
         plot.caption = element_text(color="#969494", face="italic", size=12, family="Encode Sans Narrow"),
         axis.title.x = element_text(family="Encode Sans Narrow", size=16),
@@ -59,35 +60,10 @@ ggplot(data = covid_us, aes(x = date, y = new_cases)) +
   scale_x_date(date_breaks = "1 month", date_minor_breaks = "1 week", date_labels = "%b %Y") +
   removeGridX() +
   scale_y_continuous(labels = scales::comma, expand = c(0, 0))
+```
 
-# theme(panel.border = element_blank(), panel.grid.major = element_blank(),
-# panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
-
-
-#Cumulative Counts in the U.S.
-ggplot(data = covid_us, aes(x = date, y = total_cases)) +
-  geom_line(color = "#0C6ABF") +
-  labs(title = "Cumulative COVID-19 Case Counts in the U.S.",
-       subtitle = "From January 20, 2020 to July 6, 2020",
-       caption = "Data retrieved from Our World in Data",
-       x = " \nDate of First Positive Lab", y = "") +
-  theme_light() +
-  theme(plot.title = element_text(color="black", size=22, face="bold", family="Encode Sans Normal"),
-        plot.subtitle = element_text(color="#969494", size=16, family="Encode Sans Narrow"),
-        plot.caption = element_text(color="#969494", face="italic", size=12, family="Encode Sans Narrow"),
-        axis.title.x = element_text(family="Encode Sans Narrow", size=16),
-        axis.title.y = element_text(family="Encode Sans Narrow", size=16),
-        axis.text = element_text(family="Encode Sans Narrow", size = 14),
-        axis.ticks = element_blank(),
-        panel.border = element_blank(),
-        axis.line = element_line(colour = "black")) +
-  scale_x_date(date_breaks = "1 month", date_minor_breaks = "1 week", date_labels = "%b %Y") +
-  removeGridX() +
-  scale_y_continuous(labels = scales::comma) +
-  scale_colour_wsj() +
-  theme_wsj()
-  
-
+### Figure 2. Cumulative Counts in the world
+```{r echo=FALSE, warning = FALSE}
 #Cumulative Counts in the world
 #subset the dataset
 covid_world <- owid_covid_data %>% filter (location == "United States" | location == "Mexico" | location == "Canada" | location == "China" | location == "Japan" | location == "Italy" | location == "United Kingdom"| location == "Brazil")
@@ -101,8 +77,8 @@ ggplot(data = covid_world, aes(x = date, y = total_cases)) +
        caption = "Data retrieved from Our World in Data",
        x = " \nDate of First Positive Lab", y = "") +
   theme_light() +
-  theme(plot.title = element_text(color="black", size=22, face="bold", family="Encode Sans Normal"),
-        plot.subtitle = element_text(color="#969494", size=16, family="Encode Sans Narrow"),
+  theme(plot.title = element_text(color="black", size=16, face="bold", family="Encode Sans Normal"),
+        plot.subtitle = element_text(color="#969494", size=14, family="Encode Sans Narrow"),
         plot.caption = element_text(color="#969494", face="italic", size=12, family="Encode Sans Narrow"),
         axis.title.x = element_text(family="Encode Sans Narrow", size=16),
         axis.title.y = element_text(family="Encode Sans Narrow", size=16),
@@ -114,7 +90,10 @@ ggplot(data = covid_world, aes(x = date, y = total_cases)) +
   scale_x_date(date_breaks = "1 month", date_minor_breaks = "1 week", date_labels = "%b %Y") +
   removeGridX() +
   scale_y_continuous(labels = scales::comma)
+```
 
+### Figure 3. Cumulative Counts by continent
+```{r echo=FALSE, warning = FALSE}
 #Cumulative Counts by continent
 #subset the dataset
 covid_continent <- owid_covid_data %>% filter (!is.na(continent))
@@ -129,11 +108,11 @@ ggplot(data = covid_continent, aes(x = date, y = total_cases, group = location, 
        x = " \nDate of First Positive Lab", y = "") +
   scale_colour_wsj() +
   theme_wsj() +
-  theme(plot.title = element_text(size = 20),
-        plot.subtitle = element_text(size = 16),
-        plot.caption = element_text(size = 12),
-        axis.title.x = element_text(size = 16),
-        axis.title.y = element_text(size = 16),
+  theme(plot.title = element_text(size = 14),
+        plot.subtitle = element_text(size = 12),
+        plot.caption = element_text(size = 8),
+        axis.title.x = element_text(size = 14),
+        axis.title.y = element_text(size = 14),
         axis.text.x = element_text(size = 10, angle = 45, hjust = 1),
         axis.ticks = element_blank(),
         panel.border = element_blank(),
@@ -141,3 +120,29 @@ ggplot(data = covid_continent, aes(x = date, y = total_cases, group = location, 
         strip.text = element_text(size = 16)) +
   scale_y_continuous(labels = scales::comma)
 ```
+
+```{r include = FALSE}
+### Figure 4. Cumulative Counts in the U.S.
+#Cumulative Counts in the U.S.
+ggplot(data = covid_us, aes(x = date, y = total_cases)) +
+  geom_line(color = "#0C6ABF") +
+  labs(title = "Cumulative COVID-19 Case Counts in the U.S.",
+       subtitle = "From January 20, 2020 to July 6, 2020",
+       caption = "Data retrieved from Our World in Data",
+       x = " \nDate of First Positive Lab", y = "") +
+  theme_light() +
+  theme(plot.title = element_text(color="black", size=12, face="bold", family="Encode Sans Normal"),
+        plot.subtitle = element_text(color="#969494", size=10, family="Encode Sans Narrow"),
+        plot.caption = element_text(color="#969494", face="italic", size=4, family="Encode Sans Narrow"),
+        axis.title.x = element_text(family="Encode Sans Narrow", size=16),
+        axis.title.y = element_text(family="Encode Sans Narrow", size=16),
+        axis.text = element_text(family="Encode Sans Narrow", size = 14),
+        axis.ticks = element_blank(),
+        panel.border = element_blank(),
+        axis.line = element_line(colour = "black")) +
+  scale_x_date(date_breaks = "1 month", date_minor_breaks = "1 week", date_labels = "%b %Y") +
+  removeGridX() +
+  scale_y_continuous(labels = scales::comma) +
+  scale_colour_wsj() +
+  theme_wsj()
+``` 
