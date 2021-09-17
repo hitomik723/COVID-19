@@ -42,6 +42,7 @@ covid_us <- owid_covid_data %>% filter (location == "United States") %>% filter 
 ```
 
 ### Figure 1. Epidemiologic Curves
+
 ```{r echo=FALSE, warning = FALSE}
 #Epidemiologic Curves
 ggplot(data = covid_us, aes(x = date, y = new_cases)) +
@@ -63,6 +64,7 @@ ggplot(data = covid_us, aes(x = date, y = new_cases)) +
 ```
 
 ### Figure 2. Cumulative Counts in the world
+
 ```{r echo=FALSE, warning = FALSE}
 #Cumulative Counts in the world
 #subset the dataset
@@ -93,6 +95,7 @@ ggplot(data = covid_world, aes(x = date, y = total_cases)) +
 ```
 
 ### Figure 3. Cumulative Counts by continent
+
 ```{r echo=FALSE, warning = FALSE}
 #Cumulative Counts by continent
 #subset the dataset
@@ -145,4 +148,4 @@ ggplot(data = covid_us, aes(x = date, y = total_cases)) +
   scale_y_continuous(labels = scales::comma) +
   scale_colour_wsj() +
   theme_wsj()
-``` 
+```
